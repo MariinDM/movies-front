@@ -1,1 +1,8 @@
-<p>dashboard works!</p>
+<section>
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3 p-6">
+        @for (item of listMovies; track $index) {
+        <!-- <h2>{{item.title}}</h2> -->
+        <img class="w-100 h-auto shadow rounded" [src]="item.img" alt="{{item.title}}" />
+        }
+    </div>
+</section>

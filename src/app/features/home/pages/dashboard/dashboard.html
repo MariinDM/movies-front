@@ -1,16 +1,19 @@
+@let listMovies = movies();
+
 <section>
+    @defer (on viewport; prefetch on idle) {
     <div class="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3 p-6">
         @for (item of listMovies; track $index) {
-
-        @defer (on viewport; prefetch on idle) {
-        <div class="shadow-lg rounded">
+        <div class="shadow-lg rounded hover:scale-105 transition-transform">
             <img class="w-100 h-auto" loading="lazy" [src]="item.img" alt="{{item.title}}" />
             <h2 class="font-semibold text-center p-2">{{item.title}}</h2>
         </div>
-        } @placeholder {
-        <span>Loading...</span>
-        }
-
         }
     </div>
+    } @loading {
+    <span>Loading...</span>
+    }
+    @placeholder {
+    <span>Loading...</span>
+    }
 </section>

@@ -15,6 +15,7 @@ export class Dashboard implements OnInit {
   private destroyRef = inject(DestroyRef);
   private service = inject(HomeService);
   protected movies: Movie[] = [];
+  protected filteredMovies: Movie[] = [];
 
   ngOnInit() {
     this.getPopularMovies();
@@ -33,7 +34,14 @@ export class Dashboard implements OnInit {
     ).subscribe({
       next: (movies: Movie[]) => {
         this.movies = movies;
+        this.filteredMovies = movies;
       }
     });
+  }
+
+  filterMovies(query: string) {
+    this.filteredMovies = this.movies.filter(movie =>
+      movie.title.toLowerCase().includes(query.toLowerCase())
+    );
   }
 }

@@ -1,9 +1,14 @@
 <section>
+    <div class="flex justify-center pt-5">
+        <input class="w-8/10 p-3 border border-gray-300 text-gray-700/60 rounded-full" type="text"
+            placeholder="Buscar..." (input)="filterMovies($event.target.value)" />
+    </div>
+
     @defer (on viewport; prefetch on idle) {
-    <div class="grid grid-cols-[repeat(auto-fit,minmax(150px,1fr))] gap-3 p-6">
-        @for (item of movies; track $index) {
-        <div class="shadow-lg rounded hover:scale-105 transition-transform">
-            <img class="w-100 h-auto" loading="lazy" [src]="item.img" alt="{{item.title}}" />
+    <div class="grid grid-cols-[repeat(auto-fit,minmax(150px,250px))] gap-6 p-6 justify-center">
+        @for (item of filteredMovies; track $index) {
+        <div class="shadow-lg rounded hover:scale-105 transition-transform max-w-[250px]">
+            <img class="w-full h-auto" loading="lazy" [src]="item.img" alt="{{item.title}}" />
             <h2 class="font-semibold text-center p-2">{{item.title}}</h2>
         </div>
         }
@@ -14,4 +19,4 @@
     @placeholder {
     <span>Loading...</span>
     }
-</section>
+</section>6

@@ -1,0 +1,31 @@
+<nav class="sticky top-0 z-50 bg-gray-800 shadow">
+    <div class="container-fluid mx-auto px-4 py-2">
+        <div class="flex justify-between">
+            <div class="flex items-center space-x-2">
+                <img src="/svgs/movie.svg" alt="Icono película">
+                <h1 class="text-white text-lg font-bold">Marin</h1>
+            </div>
+
+            <div class="flex items-center">
+                <button class="block md:hidden" (click)="visible = !visible">
+                    <img src="/svgs/menu-2.svg" alt="Icono menú">
+                </button>
+            </div>
+
+            <div class="hidden md:flex md:items-center md:space-x-4">
+                <a routerLink="/" class="text-white hover:text-gray-300">Inicio</a>
+                <a routerLink="/movies" class="text-white hover:text-gray-300">Películas</a>
+                <a routerLink="/series" class="text-white hover:text-gray-300">Series</a>
+                <a routerLink="/about" class="text-white hover:text-gray-300">Acerca de</a>
+            </div>
+        </div>
+
+        <div class="md:hidden transition-all duration-300 overflow-hidden"
+            [ngClass]="{'max-h-0 opacity-0': !visible, 'max-h-40 opacity-100': visible}">
+            <a routerLink="/" class="block text-white hover:text-gray-300 py-1">Inicio</a>
+            <a routerLink="/movies" class="block text-white hover:text-gray-300 py-1">Películas</a>
+            <a routerLink="/series" class="block text-white hover:text-gray-300 py-1">Series</a>
+            <a routerLink="/about" class="block text-white hover:text-gray-300 py-1">Acerca de</a>
+        </div>
+    </div>
+</nav>

@@ -19,4 +19,10 @@
     @placeholder {
     <span>Loading...</span>
     }
+
+    <div class="flex justify-center items-center space-x-2 my-2">
+        <button [disabled]="page === 1" (click)="previousPage()">«</button>
+        <span>{{ page }}</span>
+        <button (click)="nextPage()">»</button>
+    </div>
 </section>

@@ -13,6 +13,8 @@ import { environment } from '../../../../../environments/environment';
 })
 export class Dashboard implements OnInit {
 
+  page: number = 1;
+
   private destroyRef = inject(DestroyRef);
   private service = inject(HomeService);
   private readonly imageUrl = environment.imageUrl;
@@ -23,8 +25,8 @@ export class Dashboard implements OnInit {
     this.getPopularMovies();
   }
 
-  getPopularMovies() {
-    this.service.getPopularMovies(1).pipe(
+  getPopularMovies(page: number = 1) {
+    this.service.getPopularMovies(page).pipe(
       map((response: any) =>
         response.results.map((movie: any) => ({
           id: movie.id,
@@ -45,5 +47,17 @@ export class Dashboard implements OnInit {
     this.filteredMovies = this.movies.filter(movie =>
       movie.title.toLowerCase().includes(query.toLowerCase())
     );
+  }
+
+  previousPage() {
+    if (this.page > 1) {
+      this.page--;
+      this.getPopularMovies(this.page);
+    }
+  }
+
+  nextPage() {
+    this.page++;
+    this.getPopularMovies(this.page);
   }
 }

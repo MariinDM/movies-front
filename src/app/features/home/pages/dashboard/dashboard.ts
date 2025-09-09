@@ -3,6 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Movie } from '../../interfaces/movie';
 import { HomeService } from '../../services/home-service';
 import { map } from 'rxjs/operators';
+import { environment } from '../../../../../environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,6 +15,7 @@ export class Dashboard implements OnInit {
 
   private destroyRef = inject(DestroyRef);
   private service = inject(HomeService);
+  private readonly imageUrl = environment.imageUrl;
   protected movies: Movie[] = [];
   protected filteredMovies: Movie[] = [];
 
@@ -22,12 +24,12 @@ export class Dashboard implements OnInit {
   }
 
   getPopularMovies() {
-    this.service.getPopularMovies().pipe(
+    this.service.getPopularMovies(1).pipe(
       map((response: any) =>
         response.results.map((movie: any) => ({
           id: movie.id,
           title: movie.title,
-          img: `https://image.tmdb.org/t/p/original${movie.poster_path}`
+          img: `${this.imageUrl}${movie.poster_path}`
         }))
       ),
       takeUntilDestroyed(this.destroyRef)

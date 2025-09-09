@@ -12,8 +12,8 @@ export class HomeService {
   private apiUrl = environment.apiUrl;
   private http = inject(HttpClient);
 
-  getPopularMovies(): Observable<Movie[]> {
-    const url = `${this.apiUrl}/movie/popular?language=es-MX&page=1`;
+  getPopularMovies(page: number): Observable<Movie[]> {
+    const url = `${this.apiUrl}/movie/popular?language=es-MX&page=${page}`;
     return this.http.get<Movie[]>(url);
   }
 
